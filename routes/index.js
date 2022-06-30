@@ -31,6 +31,7 @@ router.get('/ticketsAvailable', function(req, res, next) {
 // POST new user 
 router.post("/sign-up" ,async function(req,res,next) {
    req.session.user = [];
+
   // console.log(req.body);
   var newUser = new userModel ({
     firstName: req.body.signUpName,
@@ -39,17 +40,35 @@ router.post("/sign-up" ,async function(req,res,next) {
     password: req.body.signUpPassword
     });
     
-    var userSaved = await newUser.save();
-    req.session.user.push(userSaved) ;
+     var userSavedBdd = await newUser.save();
+    //  console.log(userSavedBdd);
 
-    console.log(req.session.user);
-    if (req.session.user !== null ){
-      res.redirect("homepage", userSaved) ;
-    }
-    else {
-      res.redirect('login' , userSaved) ;
-    }
+    var userSaved = await userModel.find( {email : req.body.signUpEmail})
+    
+    req.session.user.push({
+      firstName: userSaved.firstName,
+      lastName: userSaved.lastName,
+      email: userSaved.email,
+      password: userSaved.password
+    }) 
+
+    console.log("----->",req.session.user.firstName);
+    // if (req.session.user !== undefined ){
+    //   res.redirect("homepage", userSaved) ;
+    // }
+    // else {
+    //   res.redirect('login' , userSaved) ;
+    // }
+    res.redirect ("login")
 })
+
+// SIGN IN 
+router.get("/sign-in" , async function(req,res,next) {
+      
+
+  res.redirect("homepage")
+}) 
+
 
 // Remplissage de la base de donnée, une fois suffit
 router.get('/save', async function(req, res, next) {
