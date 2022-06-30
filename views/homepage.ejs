@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./stylesheets/style.css">
+    <title>TICKETAK</title>
+  </head>
+  <body>
+    <!--Navbar example de boostrap-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;">
+
+      <a class="navbar-brand" href="#">
+          <img src="/images/train.png" width="30" height="30" alt="">
+      </a>        
+      <a class="navbar-brand" href="#">Ticketac</a>
+
+      <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+          </ul>
+          <span class="navbar-text">
+              <a class="nav-link" href="" style='color:#c82333; font-weight: bold;;'>CONNECTION</a>
+          </span>
+          <span class="navbar-text">
+              <a class="nav-link" href="">My last trips</a>
+          </span>
+      </div>
+
+  </nav>  
+  
+  
+  <div class="home">
+
+    <!-- Test title -->
+    <h3 class="homeTitle">One-way ticket : </h3>
+
+    <!-- Input Field -->
+    <div class="inputField">
+        <form class="form-inline" action="" method="POST">
+
+            <div class="form-group">
+                <input name="departureCity" type="text" class="form-control" id="inputPassword2" placeholder="From: Paris, Marseille..." required>
+            </div>
+                
+            <div class="form-group mx-sm-3">
+                <input name="arrivalCity" type="text" class="form-control" id="inputPassword2" placeholder="To: Lille, Nantes... " required>
+            </div>
+
+            <div class="form-group ">
+                <input name="journeyDate" type="date" class="form-control" id="inputPassword2" placeholder="Date : 02/08" required>
+            </div>
+
+          
+                
+            <button type="submit" class="btn btn-danger mx-sm-3">Go</button>
+
+        </form>
+
+        <div class="divImg">
+            <img src="/images/landmark.png" class="cityImg" alt="">
+        </div>
+
+    
+    </div>
+
+    
+    <div class="footer">
+    <p>© 2022 LaCapsule</p>
+    </div>
+</div> 
+
+
+    
+  </body>
+</html>

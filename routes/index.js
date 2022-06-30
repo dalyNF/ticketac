@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-
+var journeyModel = require('../models/journey');
+var userModel = require('../models/user');
 
 
 var city = ["Paris","Marseille","Nantes","Lyon","Rennes","Melun","Bordeaux","Lille"]
