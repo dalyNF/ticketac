@@ -1,17 +1,17 @@
-var express = require('express');
-var router = express.Router();
+// var express = require('express');
+// var router = express.Router();
 
-var userModel = require('../models/userModel');
+// var userModel = require('../models/userModel');
 
 /* GET users listing. */
 
 
 
-router.get('/', function(req, res, next) {
+// router.get('/', function(req, res, next) {
   
 
-  res.render('login');
-});
+//   res.render('login');
+// });
 
 // POST new user 
 // router.post("/sign-up" , function(req,res,next) {
@@ -30,4 +30,4 @@ router.get('/', function(req, res, next) {
 //   res.render('login') ;
 // })
 
-module.exports = router;
+// module.exports = router;
