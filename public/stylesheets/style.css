@@ -46,13 +46,24 @@ body {
   color: black;
 }
 
+.list-group{
+  margin-bottom:0;
+}
+
+.resultField{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .footer{
   width: 100%;
   text-align: center;
   bottom: 0;
   position: absolute;
   color: aliceblue;
-  font-style: italic;
+  font-style: italic; 
   font-size: 15px;
   opacity: 0.5;
 }

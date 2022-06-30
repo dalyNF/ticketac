@@ -24,6 +24,10 @@ router.get('/pasDeTrain', function(req, res, next) {
   res.render('pasDeTrain');
 });
 
+router.get('/ticketsAvailable', function(req, res, next) {
+  res.render('ticketsAvailable');
+});
+
 // POST new user 
 router.post("/sign-up" ,async function(req,res,next) {
    req.session.user = [];
