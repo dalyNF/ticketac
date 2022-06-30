@@ -12,7 +12,7 @@ var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('homepage', { title: 'Express' });
 });
 
 
@@ -43,7 +43,7 @@ router.get('/save', async function(req, res, next) {
     }
 
   }
-  res.render('index', { title: 'Express' });
+  res.render('homepage', { title: 'Express' });
 });
 
 
@@ -66,7 +66,7 @@ router.get('/result', function(req, res, next) {
   }
 
 
-  res.render('index', { title: 'Express' });
+  res.render('homepage', { title: 'Express' });
 });
 
 module.exports = router;
