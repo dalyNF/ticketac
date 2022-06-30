@@ -5,6 +5,7 @@ var journeyModel = require('../models/journey');
 var userModel = require('../models/userModel');
 
 
+
 var city = ["Paris","Marseille","Nantes","Lyon","Rennes","Melun","Bordeaux","Lille"]
 var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
 
@@ -23,6 +24,28 @@ router.get('/pasDeTrain', function(req, res, next) {
   res.render('pasDeTrain');
 });
 
+// POST new user 
+router.post("/sign-up" ,async function(req,res,next) {
+   req.session.user = [];
+  // console.log(req.body);
+  var newUser = new userModel ({
+    firstName: req.body.signUpName,
+    lastName: req.body.signUpFirstName,
+    email: req.body.signUpEmail,
+    password: req.body.signUpPassword
+    });
+    
+    var userSaved = await newUser.save();
+    req.session.user.push(userSaved) ;
+
+    console.log(req.session.user);
+    if (req.session.user !== null ){
+      res.redirect("homepage", userSaved) ;
+    }
+    else {
+      res.redirect('login' , userSaved) ;
+    }
+})
 
 // Remplissage de la base de donnée, une fois suffit
 router.get('/save', async function(req, res, next) {
