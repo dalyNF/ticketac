@@ -7,7 +7,9 @@ var options = {
   useUnifiedTopology: true
  };
 
-// --------------------- BDD -----------------------------------------------------
+
+
+// --------------------- BDD -----------------------------------------------------// 
 mongoose.connect('mongodb+srv://fackyyyyHACK:Fywou2BvnJRwmK9C@tiktak.godf7.mongodb.net/tiktak?',
    options,
    function(err) {
