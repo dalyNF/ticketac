@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <title>Ticketac</title>
+</head>
+
+<body>
+    <%- include("navbar") %>
+
+        <div class="home">
+            <h3 class="homeTitle">Tickets available : </h3>
+            <div class="resultField">
+
+                <!-- Result Number 1 -->
+    
+                <div class="card w-50">
+                    <div class="card-body resultCard">
+                        <div> Paris / Lille</div>
+                        <div><small class="text-muted">train departure at : 15 pm</small></div>
+                        <div style="display: flex;justify-content: center;align-items: center;">
+                         <div style="font-size: 20px;">90 €</div>
+                         
+    
+                         <form action="" method="POST">
+                            <input type="hidden" name="ticketDepart" value="Paris">
+                            <input type="hidden" name="ticketArrivee" value="Lille">
+                            <input type="hidden" name="ticketHeureDepart" value="15PM">
+                            <input type="hidden" name="ticketPrix" value="90€">
+                            <input type="hidden" name="ticketDate" value="6juin 2022">
+                            <button class="btn btn-danger mx-sm-3">OK</button>
+                        </form>
+                        </div>  
+                    </div>
+                </div>
+
+    
+            </div>
+
+
+        </div>
+
+</body>
