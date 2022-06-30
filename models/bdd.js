@@ -7,9 +7,10 @@ var options = {
   useUnifiedTopology: true
  };
 
- //fackyyyyHACK:Fywou2BvnJRwmK9C
+ // mongodb+srv://daly:3dom4bdd@atlascluster.ewlspmp.mongodb.net/ticketac?
+
 // --------------------- BDD -----------------------------------------------------
-mongoose.connect('mongodb+srv://fackyyyyHACK:Fywou2BvnJRwmK9C@tiktak.godf7.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://fackyyyyHACK:Fywou2BvnJRwmK9C@tiktak.godf7.mongodb.net/tiktak?',
    options,
    function(err) {
     if (err) {
