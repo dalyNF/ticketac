@@ -65,20 +65,20 @@ router.post("/sign-up" ,async function(req,res,next) {
 // SIGN IN 
 router.post("/sign-in" , async function(req,res,next) {
 
-  // var searchEmail = await userModel.findOne({
-  //   email : req.body.signUpEmail,
-  //   password:req.body.signUpPassword
-  // }) ;
+   var searchEmail = await userModel.findOne({
+     email : req.body.signUpEmail,
+     password:req.body.signUpPassword
+   }) ;
 
-  // if(searchUser!= null){
-  //   req.session.user = {
-  //     name: searchEmail.firstName,
-  //     id: searchUser._id
-  //   }
-  //   res.redirect('/')
-  // } else {
-  //   res.render('login')
-  // } 
+   if(searchEmail!= null){
+     req.session.user = {
+       name: searchEmail.firstName,
+       id: searchUser._id
+    }
+     res.redirect('/', {userInfo:req.session.user})
+   } else {
+     res.render('login', {userInfo:req.session.user})
+   } 
   res.redirect("/")
   
 }) 
