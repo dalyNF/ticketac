@@ -69,6 +69,22 @@ router.post("/sign-up" ,async function(req,res,next) {
 // SIGN IN 
 router.post("/sign-in" , async function(req,res,next) {
 
+   var searchEmail = await userModel.findOne({
+     email : req.body.signUpEmail,
+     password:req.body.signUpPassword
+   }) ;
+
+   if(searchEmail!= null){
+     req.session.user = {
+       name: searchEmail.firstName,
+       id: searchUser._id
+    }
+     res.redirect('/', {userInfo:req.session.user})
+   } else {
+     res.render('login', {userInfo:req.session.user})
+   } 
+  res.redirect("/")
+
   var searchEmail = await userModel.findOne({
     email : req.body.email,
     password:req.body.password
@@ -85,6 +101,7 @@ router.post("/sign-in" , async function(req,res,next) {
   } else {
     res.render('login' )
   } 
+
   
 }) 
 
@@ -143,10 +160,17 @@ router.get('/result', function(req, res, next) {
 });
 
 // Post reservation : 
-router.post ("/reservation" , function (req,res,next) {
-console.log(req.body);
-  res.render("/")
-})
+router.post ("/reservation" , async function (req,res,next) {
+  // console.log(req.body.departureCity);
+  var newJourney = await journeyModel.find({ 
+    departure: req.body.departureCity,
+    // arrival: req.body.arrivalCity,
+    // date: req.body.journeyDate,
+  }
+)
+console.log(newJourney);
+  res.redirect("/")
+});
 // Route myLastTrips
 
 router.get('/myLastTrips', function(req, res, next) {
