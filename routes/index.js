@@ -15,19 +15,21 @@ var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
 router.get('/', function(req, res, next) {
 
   //ajout de compte non existant méthode weatherapp
-  //  if(req.session.user == undefined){
-  //   req.session.user = []; 
-  //   res.redirect("login") ;
-  // } 
-  // console.log(req.session.user);
-  res.render('homepage', {userInfo : req.session.user});
+   if(req.session.user == undefined){
+    req.session.user = []; 
+    res.redirect("login") ;
+  }  else {
+    console.log(req.session.user);
+    res.render('homepage', {userInfo : req.session.user});
+  }
 });
 
 router.get('/login', function(req, res, next) {
   if(req.session.user == undefined){
     req.session.user = [];  
   } 
-  res.render('login', {userInfo : req.session.user});
+  console.log("La session de ----->", req.session.user);
+  res.render('login');
 });
 
 router.get('/pasDeTrain', function(req, res, next) {
@@ -38,9 +40,11 @@ router.get('/ticketsAvailable', function(req, res, next) {
   res.render('ticketsAvailable');
 });
 
+
 router.get('/myTicket', function(req, res, next) {
   res.render('myTicket', {newJourney:req.session.newJourney});
 });
+
 
 // POST new user 
 router.post("/sign-up" ,async function(req,res,next) {
@@ -64,9 +68,9 @@ router.post("/sign-up" ,async function(req,res,next) {
         id: newUserSave._id,
       }
       //tu me redirige vers la homepage
-      res.redirect ( "/",{userInfo : req.session.user} )
+      res.redirect( "/" )
   } else {
-    res.render ("login", {userInfo : req.session.user})
+    res.redirect("login")
   }
 })
 
@@ -78,15 +82,16 @@ router.post("/sign-in" , async function(req,res,next) {
      password:req.body.password
    }) ;
    
-   if(searchEmail!== null){
+   if(searchEmail !== null){
      req.session.user = {
        name: searchEmail.firstName,
        id: searchEmail._id
     }
-     res.redirect('/') ;
+     res.redirect('/' ) ;
    } else if (searchEmail == null){
      res.render('login') ;
    } 
+
 
 
   
@@ -94,6 +99,9 @@ router.post("/sign-in" , async function(req,res,next) {
   console.log(req.session.user);
 
 }) 
+
+
+// LOGOUT 
 
 router.get("/deconnexion" , function (req,res,next) {
 
@@ -169,14 +177,24 @@ req.session.user = {newJourney:req.session.newJourney};
 
 console.log("find--->" ,newJourney);
 
-  if ( newJourney.length > 0) {
 
+  req.session.user = { newJourney : newJourney};
+
+  console.log("user journey --->",req.session.user);
+  if ( newJourney.length > 0) {
     res.render("ticketsAvailable" , {newJourney}) ;
   } 
   else   {
     res.redirect ("pasDeTrain");
   }
 });
+
+// /choose ticket 
+router.post("/chooseTrip" , function (req,res,next) {
+  console.log("trip --->", req.body);
+
+  res.render('ticketsAvailable' , {newJourney : req.session.user.newJourney})
+})
 
 // Route myLastTrips
 
