@@ -40,6 +40,8 @@ router.get('/ticketsAvailable', function(req, res, next) {
   res.render('ticketsAvailable');
 });
 
+
+
 // POST new user 
 router.post("/sign-up" ,async function(req,res,next) {
    //cherche dans la bdd si l'email existe déja 
@@ -159,16 +161,24 @@ router.post ("/reservation" , async function (req,res,next) {
     date: req.body.journeyDate,
   }
 )
-console.log("find--->" ,newJourney);
 
+  req.session.user = { newJourney : newJourney};
+
+  console.log("user journey --->",req.session.user);
   if ( newJourney.length > 0) {
-
     res.render("ticketsAvailable" , {newJourney}) ;
   } 
   else   {
     res.redirect ("pasDeTrain");
   }
 });
+
+// /choose ticket 
+router.post("/chooseTrip" , function (req,res,next) {
+  console.log("trip --->", req.body);
+
+  res.render('ticketsAvailable' , {newJourney : req.session.user.newJourney})
+})
 
 // Route myLastTrips
 

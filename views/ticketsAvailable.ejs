@@ -31,14 +31,14 @@
                              <div style="font-size: 20px;"><%= newJourney[i].price %> €</div>
                              
         
-                             <form action="" method="POST">
+                             <form action="/chooseTrip" method="POST">
                                 <input type="hidden" name="ticketDepart" value=<%= newJourney[i].departure%>>
                                 <input type="hidden" name="ticketArrivee" value=<%= newJourney[i].arrival%>>
                                 <input type="hidden" name="ticketHeureDepart" value=<%= newJourney[i].departureTime %>>
                                 <input type="hidden" name="ticketPrix" value=<%= newJourney[i].price %>>
                                 <input type="hidden" name="ticketDate" value=<%= newJourney[i].date %>>
-                                <input type="hidden" name="idUser" value="">
-                                <button class="btn btn-danger mx-sm-3">OK</button>
+                                <input type="hidden" name="idUser" value=<%= [i] %> >
+                                <button type="submit" class="btn btn-danger mx-sm-3">OK</button>
                             </form>
                             </div>  
                         </div>
