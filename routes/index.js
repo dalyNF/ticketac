@@ -160,16 +160,15 @@ router.get('/result', function(req, res, next) {
 
 // Post reservation : 
 router.post ("/reservation" , async function (req,res,next) {
- /*  console.log(req.body);
+  // console.log(req.body.departureCity);
   var newJourney = await journeyModel.find({ 
     departure: req.body.departureCity,
-    arrival: req.body.arrivalCity,
-    date: req.body.journeyDate,
+    // arrival: req.body.arrivalCity,
+    // date: req.body.journeyDate,
   }
 )
-console.log(newJourney); */
-    
-  res.render("/", {journey})
+console.log(newJourney);
+  res.redirect("/")
 });
 // Route myLastTrips
 
