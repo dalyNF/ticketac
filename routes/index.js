@@ -27,7 +27,8 @@ router.get('/login', function(req, res, next) {
   if(req.session.user == undefined){
     req.session.user = [];  
   } 
-  res.render('login', {userInfo : req.session.user});
+  console.log("La session de ----->", req.session.user);
+  res.render('login', {userInfo:req.session.user});
 });
 
 router.get('/pasDeTrain', function(req, res, next) {
@@ -60,9 +61,9 @@ router.post("/sign-up" ,async function(req,res,next) {
         id: newUserSave._id,
       }
       //tu me redirige vers la homepage
-      res.redirect ( "/",{userInfo : req.session.user} )
+      res.redirect( "/" )
   } else {
-    res.render ("login", {userInfo : req.session.user})
+    res.redirect("login")
   }
 })
 
@@ -74,18 +75,25 @@ router.post("/sign-in" , async function(req,res,next) {
      password:req.body.password
    }) ;
    
-   if(searchEmail!== null){
+   if(searchEmail !== null){
      req.session.user = {
        name: searchEmail.firstName,
        id: searchEmail._id
     }
-     res.redirect('/') ;
+     res.redirect('/' ) ;
    } else if (searchEmail == null){
      res.render('login') ;
    } 
   console.log(req.session.user);
 }) 
 
+// LOGOUT 
+router.get("/deconnexion" , function (req,res,next) {
+
+  req.session.user = null;
+
+  res.redirect('/login')
+})
 
 // Remplissage de la base de donnée, une fois suffit
 router.get('/save', async function(req, res, next) {
