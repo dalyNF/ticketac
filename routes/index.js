@@ -15,10 +15,11 @@ var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
 router.get('/', function(req, res, next) {
 
   //ajout de compte non existant méthode weatherapp
-   if(req.session.user == undefined){
-    req.session.user = [];  
-  } 
-
+  //  if(req.session.user == undefined){
+  //   req.session.user = []; 
+  //   res.redirect("login") ;
+  // } 
+  // console.log(req.session.user);
   res.render('homepage', {userInfo : req.session.user});
 });
 
@@ -69,19 +70,20 @@ router.post("/sign-up" ,async function(req,res,next) {
 router.post("/sign-in" , async function(req,res,next) {
 
    var searchEmail = await userModel.findOne({
-     email : req.body.signUpEmail,
-     password:req.body.signUpPassword
+     email : req.body.email,
+     password:req.body.password
    }) ;
-
-   if(searchEmail!= null){
+   
+   if(searchEmail!== null){
      req.session.user = {
        name: searchEmail.firstName,
-       id: searchUser._id
+       id: searchEmail._id
     }
-     res.redirect('/', {userInfo:req.session.user})
-   } else {
-     res.render('login', {userInfo:req.session.user})
+     res.redirect('/') ;
+   } else if (searchEmail == null){
+     res.render('login') ;
    } 
+
   res.redirect("/")
 
   // var searchEmail = await userModel.findOne({
@@ -102,6 +104,9 @@ router.post("/sign-in" , async function(req,res,next) {
   // } 
 
   
+
+  console.log(req.session.user);
+
 }) 
 
 
@@ -167,9 +172,17 @@ router.post ("/reservation" , async function (req,res,next) {
     date: req.body.journeyDate,
   }
 )
-console.log(newJourney);
-  res.redirect("/")
+console.log("find--->" ,newJourney);
+
+  if ( newJourney.length > 0) {
+
+    res.render("ticketsAvailable" , {newJourney}) ;
+  } 
+  else   {
+    res.redirect ("pasDeTrain");
+  }
 });
+
 // Route myLastTrips
 
 
