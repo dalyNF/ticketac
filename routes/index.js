@@ -15,15 +15,18 @@ var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
 router.get('/', function(req, res, next) {
 
   //ajout de compte non existant méthode weatherapp
-  /* if(req.session.user == undefined){
-    req.session.user = [];  //userModel
-  } */
+   if(req.session.user == undefined){
+    req.session.user = [];  
+  } 
 
-  res.render('homepage');
+  res.render('homepage', {userInfo : req.session.user});
 });
 
 router.get('/login', function(req, res, next) {
-  res.render('login');
+  if(req.session.user == undefined){
+    req.session.user = [];  
+  } 
+  res.render('login', {userInfo : req.session.user});
 });
 
 router.get('/pasDeTrain', function(req, res, next) {
@@ -56,9 +59,9 @@ router.post("/sign-up" ,async function(req,res,next) {
         id: newUserSave._id,
       }
       //tu me redirige vers la homepage
-      res.redirect ( "/")
+      res.redirect ( "/",{userInfo : req.session.user} )
   } else {
-    res.redirect ("login")
+    res.render ("login", {userInfo : req.session.user})
   }
 })
 
@@ -80,6 +83,24 @@ router.post("/sign-in" , async function(req,res,next) {
      res.render('login', {userInfo:req.session.user})
    } 
   res.redirect("/")
+
+  var searchEmail = await userModel.findOne({
+    email : req.body.email,
+    password:req.body.password
+  }) ;
+  console.log(searchEmail);
+
+  if(searchEmail !== null){
+      req.session.user = {
+      firstName: searchEmail.firstName,
+      id: searchEmail._id
+    }
+    console.log("--->", req.session.user);
+    res.redirect('/' )
+  } else {
+    res.render('login' )
+  } 
+
   
 }) 
 
@@ -111,7 +132,7 @@ router.get('/save', async function(req, res, next) {
     }
 
   }
-  res.render('homepage', { title: 'Express' });
+  res.render('/');
 });
 
 
@@ -137,7 +158,19 @@ router.get('/result', function(req, res, next) {
   res.render('homepage', { title: 'Express' });
 });
 
-
+// Post reservation : 
+router.post ("/reservation" , async function (req,res,next) {
+ /*  console.log(req.body);
+  var newJourney = await journeyModel.find({ 
+    departure: req.body.departureCity,
+    arrival: req.body.arrivalCity,
+    date: req.body.journeyDate,
+  }
+)
+console.log(newJourney); */
+    
+  res.render("/", {journey})
+});
 // Route myLastTrips
 
 router.get('/myLastTrips', function(req, res, next) {
