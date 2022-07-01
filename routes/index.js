@@ -15,12 +15,13 @@ var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
 router.get('/', function(req, res, next) {
 
   //ajout de compte non existant méthode weatherapp
-  //  if(req.session.user == undefined){
-  //   req.session.user = []; 
-  //   res.redirect("login") ;
-  // } 
-  // console.log(req.session.user);
-  res.render('homepage', {userInfo : req.session.user});
+   if(req.session.user == undefined){
+    req.session.user = []; 
+    res.redirect("login") ;
+  }  else {
+    console.log(req.session.user);
+    res.render('homepage', {userInfo : req.session.user});
+  }
 });
 
 router.get('/login', function(req, res, next) {
@@ -28,7 +29,7 @@ router.get('/login', function(req, res, next) {
     req.session.user = [];  
   } 
   console.log("La session de ----->", req.session.user);
-  res.render('login', {userInfo:req.session.user});
+  res.render('login');
 });
 
 router.get('/pasDeTrain', function(req, res, next) {
@@ -84,7 +85,8 @@ router.post("/sign-in" , async function(req,res,next) {
    } else if (searchEmail == null){
      res.render('login') ;
    } 
-  console.log(req.session.user);
+  console.log("SESSION ???--->",req.session.user);
+
 }) 
 
 // LOGOUT 
@@ -92,7 +94,7 @@ router.get("/deconnexion" , function (req,res,next) {
 
   req.session.user = null;
 
-  res.redirect('/login')
+  res.redirect('/login');
 })
 
 // Remplissage de la base de donnée, une fois suffit
@@ -154,7 +156,7 @@ router.post ("/reservation" , async function (req,res,next) {
   var newJourney = await journeyModel.find({ 
     departure: req.body.departureCity,
     arrival: req.body.arrivalCity,
-    date: req.body.journeyDate
+    date: req.body.journeyDate,
   }
 )
 console.log("find--->" ,newJourney);
@@ -169,6 +171,8 @@ console.log("find--->" ,newJourney);
 });
 
 // Route myLastTrips
+
+
 
 router.get('/myLastTrips', function(req, res, next) {
 
@@ -196,3 +200,31 @@ module.exports = router;
 
 })
  */
+
+
+/* var searchUser = await userModel.findOne({
+  email: req.body.emailFromFront
+})
+
+if(!searchUser){
+  var newUser = new userModel({
+    name: req.body.usernameFromFront,
+    email: req.body.emailFromFront,
+    password: req.body.passwordFromFront,
+  })
+
+  var newUserSave = await newUser.save();
+
+  req.session.user = {
+    name: newUserSave.name,
+    id: newUserSave._id,
+  }
+  if(req.session.panier === undefined){
+    req.session.panier=[]
+  }
+  res.redirect('/homepage')
+} else {
+  res.redirect('/')
+}
+
+}) */

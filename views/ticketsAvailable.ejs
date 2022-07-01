@@ -15,6 +15,9 @@
 
         <div class="home">
             <h3 class="homeTitle">Tickets available : </h3>
+
+           
+
             <div class="resultField">
 
                 <!-- Result Number 1 -->
@@ -22,19 +25,19 @@
                     
                     <div class="card w-50">
                         <div class="card-body resultCard">
-                            <div>  </div>
-                            <div><small class="text-muted">train departure at : 15 pm</small></div>
+                            <div><%= newJourney[i].departure %> / <%= newJourney[i].arrival %>  </div>
+                            <div><small class="text-muted">train departure at : <%= newJourney[i].departureTime %> pm</small></div>
                             <div style="display: flex;justify-content: center;align-items: center;">
-                             <div style="font-size: 20px;">90 €</div>
+                             <div style="font-size: 20px;"><%= newJourney[i].price %> €</div>
                              
         
                              <form action="" method="POST">
-                                <input type="hidden" name="ticketDepart" value="Paris">
-                                <input type="hidden" name="ticketArrivee" value="Lille">
-                                <input type="hidden" name="ticketHeureDepart" value="15PM">
-                                <input type="hidden" name="ticketPrix" value="90€">
-                                <input type="hidden" name="ticketDate" value="6juin 2022">
-                                <input type="hidden" name="idUser" value="1">
+                                <input type="hidden" name="ticketDepart" value=<%= newJourney[i].departure%>>
+                                <input type="hidden" name="ticketArrivee" value=<%= newJourney[i].arrival%>>
+                                <input type="hidden" name="ticketHeureDepart" value=<%= newJourney[i].departureTime %>>
+                                <input type="hidden" name="ticketPrix" value=<%= newJourney[i].price %>>
+                                <input type="hidden" name="ticketDate" value=<%= newJourney[i].date %>>
+                                <input type="hidden" name="idUser" value="">
                                 <button class="btn btn-danger mx-sm-3">OK</button>
                             </form>
                             </div>  
