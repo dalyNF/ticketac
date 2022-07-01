@@ -36,43 +36,51 @@ router.get('/ticketsAvailable', function(req, res, next) {
 
 // POST new user 
 router.post("/sign-up" ,async function(req,res,next) {
-   req.session.user = [];
-
-  // console.log(req.body);
-  var newUser = new userModel ({
-    firstName: req.body.signUpName,
-    lastName: req.body.signUpFirstName,
-    email: req.body.signUpEmail,
-    password: req.body.signUpPassword
-    });
-    
-     var userSavedBdd = await newUser.save();
-    //  console.log(userSavedBdd);
-
-    var userSaved = await userModel.find( {email : req.body.signUpEmail})
-    
-    req.session.user.push({
-      firstName: userSaved.firstName,
-      lastName: userSaved.lastName,
-      email: userSaved.email,
-      password: userSaved.password
-    }) 
-
-    console.log("----->",req.session.user.firstName);
-    // if (req.session.user !== undefined ){
-    //   res.redirect("homepage", userSaved) ;
-    // }
-    // else {
-    //   res.redirect('login' , userSaved) ;
-    // }
+   //cherche dans la bdd si l'email existe déja 
+  var searchEmail = await userModel.findOne({email : req.body.signUpEmail})
+  console.log(searchEmail);
+  //si l'email n'y est pas
+  if (!searchEmail) {
+    //tu mets les infos du front dans la bdd
+    var newUser = new userModel ({
+      firstName: req.body.signUpFirstName,
+      lastName: req.body.signUpName,
+      email: req.body.signUpEmail,
+      password: req.body.signUpPassword
+      });
+      console.log(newUser);
+        var newUserSave = await newUser.save();
+      // tu met ces infos dans la session
+      req.session.user = {
+        name: newUserSave.firstName,
+        id: newUserSave._id,
+      }
+      //tu me redirige vers la homepage
+      res.redirect ( "/")
+  } else {
     res.redirect ("login")
+  }
 })
 
 // SIGN IN 
-router.get("/sign-in" , async function(req,res,next) {
-      
+router.post("/sign-in" , async function(req,res,next) {
 
-  res.redirect("homepage")
+  // var searchEmail = await userModel.findOne({
+  //   email : req.body.signUpEmail,
+  //   password:req.body.signUpPassword
+  // }) ;
+
+  // if(searchUser!= null){
+  //   req.session.user = {
+  //     name: searchEmail.firstName,
+  //     id: searchUser._id
+  //   }
+  //   res.redirect('/')
+  // } else {
+  //   res.render('login')
+  // } 
+  res.redirect("/")
+  
 }) 
 
 
