@@ -16,9 +16,10 @@ router.get('/', function(req, res, next) {
 
   //ajout de compte non existant méthode weatherapp
    if(req.session.user == undefined){
-    req.session.user = [];  
+    req.session.user = []; 
+    res.redirect("login") ;
   } 
-
+  console.log(req.session.user);
   res.render('homepage', {userInfo : req.session.user});
 });
 
