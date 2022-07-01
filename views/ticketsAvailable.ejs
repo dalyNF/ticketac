@@ -18,27 +18,29 @@
             <div class="resultField">
 
                 <!-- Result Number 1 -->
-    
-                <div class="card w-50">
-                    <div class="card-body resultCard">
-                        <div> Paris / Lille</div>
-                        <div><small class="text-muted">train departure at : 15 pm</small></div>
-                        <div style="display: flex;justify-content: center;align-items: center;">
-                         <div style="font-size: 20px;">90 €</div>
-                         
-    
-                         <form action="" method="POST">
-                            <input type="hidden" name="ticketDepart" value="Paris">
-                            <input type="hidden" name="ticketArrivee" value="Lille">
-                            <input type="hidden" name="ticketHeureDepart" value="15PM">
-                            <input type="hidden" name="ticketPrix" value="90€">
-                            <input type="hidden" name="ticketDate" value="6juin 2022">
-                            <input type="hidden" name="idUser" value="1">
-                            <button class="btn btn-danger mx-sm-3">OK</button>
-                        </form>
-                        </div>  
+                <% for( let i = 0; i < newJourney.length; i++ ) { %>
+                    
+                    <div class="card w-50">
+                        <div class="card-body resultCard">
+                            <div>  </div>
+                            <div><small class="text-muted">train departure at : 15 pm</small></div>
+                            <div style="display: flex;justify-content: center;align-items: center;">
+                             <div style="font-size: 20px;">90 €</div>
+                             
+        
+                             <form action="" method="POST">
+                                <input type="hidden" name="ticketDepart" value="Paris">
+                                <input type="hidden" name="ticketArrivee" value="Lille">
+                                <input type="hidden" name="ticketHeureDepart" value="15PM">
+                                <input type="hidden" name="ticketPrix" value="90€">
+                                <input type="hidden" name="ticketDate" value="6juin 2022">
+                                <input type="hidden" name="idUser" value="1">
+                                <button class="btn btn-danger mx-sm-3">OK</button>
+                            </form>
+                            </div>  
+                        </div>
                     </div>
-                </div>
+                <% } %>
 
     
             </div>
