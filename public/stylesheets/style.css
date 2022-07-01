@@ -57,6 +57,18 @@ body {
   align-items: center;
 }
 
+.card{
+  margin-bottom: 10px;  
+}
+
+.resultCard{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; 
+}
+
+
 .footer{
   width: 100%;
   text-align: center;

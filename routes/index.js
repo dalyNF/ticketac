@@ -13,6 +13,12 @@ var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+
+  //ajout de compte non existant méthode weatherapp
+  /* if(req.session.user == undefined){
+    req.session.user = [];  //userModel
+  } */
+
   res.render('homepage');
 });
 
@@ -123,4 +129,32 @@ router.get('/result', function(req, res, next) {
   res.render('homepage', { title: 'Express' });
 });
 
+
+// Route myLastTrips
+
+router.get('/myLastTrips', function(req, res, next) {
+
+  res.render('myLastTrips');
+});
+
 module.exports = router;
+
+
+// EXEMPLE TEST DES TRAJETS (cf. form ligne 25 homepage)
+
+/* router.post('/journeys', async function(req, res, next){
+
+  var departureCity = req.body.departureCity;
+  var arrivalCity = req.body.arrivalCity;
+  var dateDeparture = req.body.journeyDate;
+
+  var journey = await journeyModel.find({
+    departure: departureCity,
+    arrival: arrivalCity,
+    date: dateDeparture
+  })
+
+
+
+})
+ */

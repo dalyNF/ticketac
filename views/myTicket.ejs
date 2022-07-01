@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="./stylesheets/style.css">
+        <title>TICKETAK</title>
+</head>
+<body>
+    <%- include('navbar') %>
+
+
+    <div class="home">
+
+        <!-- Test title -->
+        <h3 class="homeTitle">My tickets : </h3>
+
+        <!-- Table resultField -->
+
+        
+        <div class="tableDiv">
+            <table class="table table-light ">
+            <thead>
+                <tr>
+                <th scope="col">N°</th>
+                <th scope="col">Journey</th>
+                <th scope="col">Date</th>
+                <th scope="col">Departure time</th>
+                <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                <th scope="row"> 1 </th>
+                <td> Marseille / Paris</td>
+                <td> 01/07/2022 </td>
+                <td> 15 pm</td>
+                <td> 240€</td>
+                </tr>
+
+
+                <tr  class="table-danger">
+                <th colspan="4">Total Basket</th>
+                <td> 240€</td>
+                </tr>
+
+            </tbody>
+            </table>
+        </div>
+            <div style="margin-left:80%;">
+                <button type="button" data-toggle="mordal" data-target="#resume" class="btn btn-danger">CONFIRM</button>
+            </div>
+</div>
+</body>
+</html>
