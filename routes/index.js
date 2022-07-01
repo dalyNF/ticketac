@@ -13,11 +13,20 @@ var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('homepage');
+
+  //ajout de compte non existant méthode weatherapp
+   if(req.session.user == undefined){
+    req.session.user = [];  
+  } 
+
+  res.render('homepage', {userInfo : req.session.user});
 });
 
 router.get('/login', function(req, res, next) {
-  res.render('login');
+  if(req.session.user == undefined){
+    req.session.user = [];  
+  } 
+  res.render('login', {userInfo : req.session.user});
 });
 
 router.get('/pasDeTrain', function(req, res, next) {
@@ -50,30 +59,31 @@ router.post("/sign-up" ,async function(req,res,next) {
         id: newUserSave._id,
       }
       //tu me redirige vers la homepage
-      res.redirect ( "/")
+      res.redirect ( "/",{userInfo : req.session.user} )
   } else {
-    res.redirect ("login")
+    res.render ("login", {userInfo : req.session.user})
   }
 })
 
 // SIGN IN 
 router.post("/sign-in" , async function(req,res,next) {
 
-  // var searchEmail = await userModel.findOne({
-  //   email : req.body.signUpEmail,
-  //   password:req.body.signUpPassword
-  // }) ;
+  var searchEmail = await userModel.findOne({
+    email : req.body.email,
+    password:req.body.password
+  }) ;
+  console.log(searchEmail);
 
-  // if(searchUser!= null){
-  //   req.session.user = {
-  //     name: searchEmail.firstName,
-  //     id: searchUser._id
-  //   }
-  //   res.redirect('/')
-  // } else {
-  //   res.render('login')
-  // } 
-  res.redirect("/")
+  if(searchEmail !== null){
+      req.session.user = {
+      firstName: searchEmail.firstName,
+      id: searchEmail._id
+    }
+    console.log("--->", req.session.user);
+    res.redirect('/' )
+  } else {
+    res.render('login' )
+  } 
   
 }) 
 
@@ -105,7 +115,7 @@ router.get('/save', async function(req, res, next) {
     }
 
   }
-  res.render('homepage', { title: 'Express' });
+  res.render('/');
 });
 
 
@@ -131,4 +141,36 @@ router.get('/result', function(req, res, next) {
   res.render('homepage', { title: 'Express' });
 });
 
+// Post reservation : 
+router.post ("/reservation" , function (req,res,next) {
+console.log(req.body);
+  res.render("/")
+})
+// Route myLastTrips
+
+router.get('/myLastTrips', function(req, res, next) {
+
+  res.render('myLastTrips');
+});
+
 module.exports = router;
+
+
+// EXEMPLE TEST DES TRAJETS (cf. form ligne 25 homepage)
+
+/* router.post('/journeys', async function(req, res, next){
+
+  var departureCity = req.body.departureCity;
+  var arrivalCity = req.body.arrivalCity;
+  var dateDeparture = req.body.journeyDate;
+
+  var journey = await journeyModel.find({
+    departure: departureCity,
+    arrival: arrivalCity,
+    date: dateDeparture
+  })
+
+
+
+})
+ */
