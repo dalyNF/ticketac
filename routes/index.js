@@ -84,22 +84,22 @@ router.post("/sign-in" , async function(req,res,next) {
    } 
   res.redirect("/")
 
-  var searchEmail = await userModel.findOne({
-    email : req.body.email,
-    password:req.body.password
-  }) ;
-  console.log(searchEmail);
+  // var searchEmail = await userModel.findOne({
+  //   email : req.body.email,
+  //   password:req.body.password
+  // }) ;
+  // console.log(searchEmail);
 
-  if(searchEmail !== null){
-      req.session.user = {
-      firstName: searchEmail.firstName,
-      id: searchEmail._id
-    }
-    console.log("--->", req.session.user);
-    res.redirect('/' )
-  } else {
-    res.render('login' )
-  } 
+  // if(searchEmail !== null){
+  //     req.session.user = {
+  //     firstName: searchEmail.firstName,
+  //     id: searchEmail._id
+  //   }
+  //   console.log("--->", req.session.user);
+  //   res.redirect('/' )
+  // } else {
+  //   res.render('login' )
+  // } 
 
   
 }) 
@@ -163,14 +163,16 @@ router.post ("/reservation" , async function (req,res,next) {
   // console.log(req.body.departureCity);
   var newJourney = await journeyModel.find({ 
     departure: req.body.departureCity,
-    // arrival: req.body.arrivalCity,
-    // date: req.body.journeyDate,
+    arrival: req.body.arrivalCity,
+    date: req.body.journeyDate,
   }
 )
 console.log(newJourney);
   res.redirect("/")
 });
 // Route myLastTrips
+
+
 
 router.get('/myLastTrips', function(req, res, next) {
 
@@ -198,3 +200,31 @@ module.exports = router;
 
 })
  */
+
+
+/* var searchUser = await userModel.findOne({
+  email: req.body.emailFromFront
+})
+
+if(!searchUser){
+  var newUser = new userModel({
+    name: req.body.usernameFromFront,
+    email: req.body.emailFromFront,
+    password: req.body.passwordFromFront,
+  })
+
+  var newUserSave = await newUser.save();
+
+  req.session.user = {
+    name: newUserSave.name,
+    id: newUserSave._id,
+  }
+  if(req.session.panier === undefined){
+    req.session.panier=[]
+  }
+  res.redirect('/homepage')
+} else {
+  res.redirect('/')
+}
+
+}) */
