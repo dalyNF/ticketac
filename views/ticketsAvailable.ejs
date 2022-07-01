@@ -36,7 +36,8 @@
                                 <input type="hidden" name="ticketHeureDepart" value=<%= newJourney[i].departureTime %>>
                                 <input type="hidden" name="ticketPrix" value=<%= newJourney[i].price %>>
                                 <input type="hidden" name="ticketDate" value=<%= newJourney[i].date %>>
-                                <button class="btn btn-danger mx-sm-3">OK</button>
+                                <input type="hidden" name="idUser" value=<%= i %>>
+                                <button type="submit" class="btn btn-danger mx-sm-3">OK</button>
                             </form>
                             </div>  
                         </div>

@@ -38,6 +38,10 @@ router.get('/ticketsAvailable', function(req, res, next) {
   res.render('ticketsAvailable');
 });
 
+router.get('/myTicket', function(req, res, next) {
+  res.render('myTicket', {newJourney:req.session.newJourney});
+});
+
 // POST new user 
 router.post("/sign-up" ,async function(req,res,next) {
    //cherche dans la bdd si l'email existe déja 
@@ -84,24 +88,6 @@ router.post("/sign-in" , async function(req,res,next) {
      res.render('login') ;
    } 
 
-  res.redirect("/")
-
-  // var searchEmail = await userModel.findOne({
-  //   email : req.body.email,
-  //   password:req.body.password
-  // }) ;
-  // console.log(searchEmail);
-
-  // if(searchEmail !== null){
-  //     req.session.user = {
-  //     firstName: searchEmail.firstName,
-  //     id: searchEmail._id
-  //   }
-  //   console.log("--->", req.session.user);
-  //   res.redirect('/' )
-  // } else {
-  //   res.render('login' )
-  // } 
 
   
 
@@ -109,6 +95,12 @@ router.post("/sign-in" , async function(req,res,next) {
 
 }) 
 
+router.get("/deconnexion" , function (req,res,next) {
+
+  req.session.user = null;
+
+  res.redirect('/login')
+})
 
 // Remplissage de la base de donnée, une fois suffit
 router.get('/save', async function(req, res, next) {
@@ -172,6 +164,9 @@ router.post ("/reservation" , async function (req,res,next) {
     date: req.body.journeyDate,
   }
 )
+
+req.session.user = {newJourney:req.session.newJourney};
+
 console.log("find--->" ,newJourney);
 
   if ( newJourney.length > 0) {

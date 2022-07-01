@@ -43,8 +43,12 @@
 
 
                 <tr  class="table-danger">
+                    <% var somme = 0 %>
+                    <% for (var i=0; i< newJourney.length; i++) { %>
+                    <% somme += newJourney[i].price %>
                 <th colspan="4">Total Basket</th>
-                <td> 240€</td>
+                <% } %>
+                <td> <%= somme %>€</td>
                 </tr>
 
             </tbody>
